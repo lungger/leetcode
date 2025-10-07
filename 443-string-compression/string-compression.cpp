@@ -1,34 +1,20 @@
 class Solution {
 public:
     int compress(vector<char>& chars) {
-        vector<char> s;
-        int count = 1;
-        char prev = chars[0];
-        for (int i = 1; i < chars.size(); i++) {
-            if (chars[i] == prev) {
-                count++;
+        int i = 0, res = 0;
+        while (i < chars.size()) {
+            int groupLength = 1;
+            while (i + groupLength < chars.size() && chars[i + groupLength] == chars[i]) {
+                groupLength++;
             }
-            else {
-                s.push_back(prev);
-                if (count != 1) {
-                    std::string temp = std::to_string(count);
-                    for (auto c : temp) {
-                        s.push_back(c);
-                    }
-                    count = 1;
+            chars[res++] = chars[i];
+            if (groupLength > 1) {
+                for (char c : to_string(groupLength)) {
+                    chars[res++] = c;
                 }
             }
-            prev = chars[i];
+            i += groupLength;
         }
-        s.push_back(prev);
-        if (count != 1) {
-            std::string temp = std::to_string(count);
-            for (auto c : temp) {
-                s.push_back(c);
-            }
-            count = 1;
-        }
-        chars = s;
-        return chars.size();
+        return res;
     }
 };
