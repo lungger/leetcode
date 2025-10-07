@@ -15,6 +15,9 @@
 
 <p><strong>Note: </strong>The characters in the array beyond the returned length do not matter and should be ignored.</p>
 
+<p><strong>Note: </strong>雙指標（read, write）：read 掃過原陣列找群組，write 在原陣列上原地覆寫結果 → 達到「常數額外空間」。.</p>
+
+
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
 
