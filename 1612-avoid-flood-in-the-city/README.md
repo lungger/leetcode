@@ -18,6 +18,9 @@
 <p>If there are multiple valid answers return <strong>any</strong> of them. If it is impossible to avoid flood return <strong>an empty array</strong>.</p>
 
 <p>Notice that if you chose to dry a full lake, it becomes empty, but if you chose to dry an empty lake, nothing changes.</p>
+<ul>
+	<li>解題思路: 貪婪演算法，將晴天(set)跟湖最後一次下雨天(map)記錄起來，當湖遇到再次下雨，找最後一次下雨天後的可用晴天(upper_bound)，如果沒有返回無解，如果有將答案陣列中那晴天改成湖的編號，可用晴天記得移除</li>
+</ul>
 
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
