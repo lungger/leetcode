@@ -5,8 +5,8 @@ public:
         int best = 0;
         int h = 0;
         while (left < right) {
-            h = height[left] < height[right] ? height[left] : height[right];
-            best = best > (h * (right - left)) ? best : (h * (right - left));
+            h = min (height[left], height[right]);
+            best = max(best, (h * (right - left)));
             if (height[left] < height[right]) {
                 left++;
             }
