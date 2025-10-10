@@ -1,18 +1,20 @@
 class Solution {
 public:
     int maxOperations(vector<int>& nums, int k) {
-        unordered_map<int, int> myMap;
+        sort(nums.begin(), nums.end());  // O(n log n)
+
+        int l = 0, r = (int)nums.size() - 1;
         int ans = 0;
 
-        for (auto i : nums) {
-            int y = k - i;
-            auto it = myMap.find(y);
-            if (it != myMap.end() && it->second > 0) {
+        while (l < r) {
+            int sum = nums[l] + nums[r];
+            if (sum == k) {
                 ++ans;
-                --(it->second);
-            }
-            else {
-                ++myMap[i];
+                ++l; --r;
+            } else if (sum < k) {
+                ++l;  // 和太小，左指針右移增加和
+            } else {
+                --r;  // 和太大，右指針左移減少和
             }
         }
     
