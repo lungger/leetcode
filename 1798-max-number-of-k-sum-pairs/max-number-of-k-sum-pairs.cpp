@@ -16,7 +16,7 @@ public:
                 ans += it->second / 2;
                 continue;
             }
-            
+            if (a > b) continue; 
             auto jt = myMap.find(b);
             if (jt == myMap.end()) continue;
             int m = min(jt->second, it->second);
