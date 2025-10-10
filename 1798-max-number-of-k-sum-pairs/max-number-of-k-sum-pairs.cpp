@@ -5,24 +5,17 @@ public:
         int ans = 0;
 
         for (auto i : nums) {
-            myMap[i]++;
-        }
-        
-        for (auto it = myMap.begin(); it != myMap.end(); it++) {
-            int a = it->first;
-            int b = k - a;
-
-            if (a == b) {
-                ans += it->second / 2;
-                continue;
+            int y = k - i;
+            auto it = myMap.find(y);
+            if (it != myMap.end() && it->second > 0) {
+                ++ans;
+                --(it->second);
             }
-            if (a > b) continue; 
-            auto jt = myMap.find(b);
-            if (jt == myMap.end()) continue;
-            int m = min(jt->second, it->second);
-            ans += m;            
-            
+            else {
+                ++myMap[i];
+            }
         }
+    
         return ans;
     }
 };
