@@ -5,22 +5,22 @@ public:
         int ans = 0;
 
         for (auto i : nums) {
-            if (myMap.find(i) == myMap.end()) {
-                myMap[i] = 0;
-            }
             myMap[i]++;
         }
         
         for (auto it = myMap.begin(); it != myMap.end(); it++) {
-            if (it->first == k - it->first) {
+            int a = it->first;
+            int b = k - a;
+
+            if (a == b) {
                 ans += it->second / 2;
             }
             else {
-                int r = k - it->first;
-                if (myMap.find(r) != myMap.end()) {
-                    int m = min(myMap[r], it->second);
+                auto jt = myMap.find(b);
+                if (jt != myMap.end()) {
+                    int m = min(jt->second, it->second);
                     ans += m;
-                    myMap[r] -= m;
+                    jt->second -= m;
                     it->second -= m;
                 }
             }
