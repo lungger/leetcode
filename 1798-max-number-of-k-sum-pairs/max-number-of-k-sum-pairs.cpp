@@ -14,16 +14,17 @@ public:
 
             if (a == b) {
                 ans += it->second / 2;
+                continue;
             }
-            else {
-                auto jt = myMap.find(b);
-                if (jt != myMap.end()) {
-                    int m = min(jt->second, it->second);
-                    ans += m;
-                    jt->second -= m;
-                    it->second -= m;
-                }
-            }
+            
+            auto jt = myMap.find(b);
+            if (jt == myMap.end()) continue;
+            int m = min(jt->second, it->second);
+            ans += m;
+            jt->second -= m;
+            it->second -= m;
+            
+            
         }
         return ans;
     }
