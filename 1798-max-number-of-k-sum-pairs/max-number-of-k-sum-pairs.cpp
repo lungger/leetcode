@@ -1,7 +1,7 @@
 class Solution {
 public:
     int maxOperations(vector<int>& nums, int k) {
-        map<int, int> myMap;
+        unordered_map<int, int> myMap;
         int ans = 0;
 
         for (auto i : nums) {
@@ -20,10 +20,7 @@ public:
             auto jt = myMap.find(b);
             if (jt == myMap.end()) continue;
             int m = min(jt->second, it->second);
-            ans += m;
-            jt->second -= m;
-            it->second -= m;
-            
+            ans += m;            
             
         }
         return ans;
