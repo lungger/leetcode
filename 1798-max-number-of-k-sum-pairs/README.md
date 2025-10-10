@@ -4,6 +4,9 @@
 
 <p>Return <em>the maximum number of operations you can perform on the array</em>.</p>
 
+<p>單趟雜湊（平均 O(n)）</p>
+<p>排序 + 雙指針（O(n log n), O(1) 空間）</p>
+
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
 
