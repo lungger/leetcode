@@ -7,10 +7,7 @@ public:
         for (auto x : arr) ++occurrences[x];
 
         for (auto& [a, count] : occurrences) {
-            if (occset.find(count) == occset.end()) {
-                occset.insert(count);
-            }
-            else {
+            if (!occset.insert(count).second) {
                 return false;
             }
         }
