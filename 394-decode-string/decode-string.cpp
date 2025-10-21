@@ -22,10 +22,6 @@ public:
             else if (c == ']') {
                 num = numStack.top();
                 numStack.pop();
-                if (tempS == "") {
-                    tempS = stringStack.top();
-                    stringStack.pop();
-                }
                 string t = stringStack.top();
                 stringStack.pop();
                 while (num > 0) {
