@@ -31,9 +31,6 @@ public:
                 tempS = t;
             }
         }
-        if (!stringStack.empty()) {
-            tempS = stringStack.top();
-        }
 
         return tempS;
     }
