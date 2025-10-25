@@ -14,9 +14,8 @@ public:
         if (!head || !head->next) return head;
         
         ListNode* curr = head;
-        ListNode* oddHead = head;
         ListNode* evenHead = head->next;
-        ListNode* oddPrev = oddHead;
+        ListNode* oddPrev = head;
         ListNode* evenPrev = evenHead;
 
         while (curr->next && curr->next->next) {
@@ -29,6 +28,6 @@ public:
                 evenPrev = evenPrev->next;
         }
         oddPrev->next = evenHead;
-        return oddHead;
+        return head;
     }
 };
