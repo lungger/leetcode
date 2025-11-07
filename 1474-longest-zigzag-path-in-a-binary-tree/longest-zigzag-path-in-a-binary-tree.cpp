@@ -23,14 +23,8 @@ public:
         }
 
         count = max(currLen, count);
-        if (direction) {
-            dfs(root->left, currLen+1, !direction);
-            dfs(root->right, 1, direction);
-        }
-        else {
-            dfs(root->left, 1, direction);
-            dfs(root->right, currLen+1, !direction);
-        }
+        dfs(root->left,  direction ? currLen + 1 : 1, false);
+        dfs(root->right,  direction ? 1 : currLen + 1, true);
     }
 
 private:
