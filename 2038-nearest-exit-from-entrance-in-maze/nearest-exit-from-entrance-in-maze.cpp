@@ -1,62 +1,38 @@
 class Solution {
 public:
-    bool checkExit(int borderRow, int borderCol, vector<int>& pos) {
-        return pos[0] == 0 || pos[0] == borderRow || pos[1] == 0 || pos[1] == borderCol;
-    }
-
     int nearestExit(vector<vector<char>>& maze, vector<int>& entrance) {
-        int borderRow = maze.size() - 1;
-        int borderCol = maze[0].size() - 1;
-        vector<vector<int>> visited(maze.size(), vector<int>(maze[0].size(), 0));
-        queue<vector<int>> q;
+        int m = maze.size(), n = maze[0].size();
+        int startRow = entrance[0], startCol = entrance[1];
 
-        entrance.push_back(0);
-        visited[entrance[0]][entrance[1]]++;
-        q.push(entrance);
+        queue<pair<int,int>> q;
+        q.push({startRow, startCol});
+        maze[startRow][startCol] = '+'; // mark visited
 
-        while(!q.empty()) {
-            vector<int> pos = q.front();
-            q.pop();
-            if (pos[0] > 0 && maze[pos[0]-1][pos[1]] != '+' && !visited[pos[0]-1][pos[1]]) {
-                vector<int> temp = pos;
-                temp[0]--;
-                temp[2]++;
-                visited[temp[0]][temp[1]]++;
-                if (checkExit(borderRow, borderCol, temp)) {
-                    return temp[2];
+        int steps = 0;
+        int dr[4] = {-1, 1, 0, 0};
+        int dc[4] = {0, 0, -1, 1};
+
+        while (!q.empty()) {
+            int sz = q.size();
+            while (sz--) {
+                auto [row, col] = q.front();
+                q.pop();
+
+                for (int k = 0; k < 4; k++) {
+                    int nextRow = row + dr[k], nextCol = col + dc[k];
+                    if (nextRow < 0 || nextRow >= m || nextCol < 0 || nextCol >= n) continue;
+                    if (maze[nextRow][nextCol] == '+') continue; // wall or visited
+
+                    // next cell is reachable, steps+1
+                    if (nextRow == 0 || nextRow == m-1 || nextCol == 0 || nextCol == n-1) {
+                        return steps + 1;
+                    }
+
+                    maze[nextRow][nextCol] = '+'; // mark visited
+                    q.push({nextRow, nextCol});
                 }
-                q.push(temp);
             }
-            if (pos[0] < borderRow && maze[pos[0]+1][pos[1]] != '+' && !visited[pos[0]+1][pos[1]]) {
-                vector<int> temp = pos;
-                temp[0]++;
-                temp[2]++;
-                visited[temp[0]][temp[1]]++;
-                if (checkExit(borderRow, borderCol, temp)) {
-                    return temp[2];
-                }
-                q.push(temp);
-            }
-            if (pos[1] > 0 && maze[pos[0]][pos[1]-1] != '+' && !visited[pos[0]][pos[1]-1]) {
-                vector<int> temp = pos;
-                temp[1]--;
-                temp[2]++;
-                visited[temp[0]][temp[1]]++;
-                if (checkExit(borderRow, borderCol, temp)) {
-                    return temp[2];
-                }
-                q.push(temp);
-            }
-            if (pos[1] < borderCol && maze[pos[0]][pos[1]+1] != '+' && !visited[pos[0]][pos[1]+1]) {
-                vector<int> temp = pos;
-                temp[1]++;
-                temp[2]++;
-                visited[temp[0]][temp[1]]++;
-                if (checkExit(borderRow, borderCol, temp)) {
-                    return temp[2];
-                }
-                q.push(temp);
-            }
+            steps++;
         }
         return -1;
     }
