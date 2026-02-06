@@ -19,7 +19,7 @@ public:
             
             if (temp <= (long long)h) {
                 r = mid - 1;
-                ans = min(mid, ans);
+                ans = mid;
             }
             else if (temp > (long long)h) {
                 l = mid + 1;
